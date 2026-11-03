@@ -1,0 +1,1018 @@
+﻿<!DOCTYPE html>
+<html lang="ml">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+<title>NK നാട്ടുസേവനങ്ങൾ</title>
+<style>
+:root{--primary:#123c69;--accent:#1d4ed8;--bg:#f3f6f5;--card:#fff;--text:#17211f;--muted:#66736f;--border:#d6dfdc;--radius:12px}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);font-family:Arial,"Noto Sans Malayalam",sans-serif;color:var(--text);line-height:1.5;overflow-x:hidden;}
+header{
+ background-color: #123c69;
+ color:white;padding:25px 20px;
+ border-radius:0 0 24px 24px;
+ box-shadow:0 4px 15px rgba(18,60,105,0.15);
+ background-size:cover;background-position:center;background-repeat:no-repeat;
+ position:relative;
+ width:100%;
+}
+.header-overlay{position:absolute;inset:0;background:rgba(0,0,0,0.25);border-radius:0 0 24px 24px;z-index:1;}
+.header-inner{position:relative;z-index:2;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:15px;}
+.header-left h2{margin:0 0 4px;font-size:22px;font-weight:800;text-shadow:0 2px 4px rgba(0,0,0,0.3);}
+.header-left p{margin:0 0 8px;font-size:13px;opacity:0.95;font-weight:600;}
+.header-left .helpline-text{font-size:13px;background:rgba(0,0,0,0.35);padding:5px 12px;border-radius:20px;display:inline-block;font-weight:700;}
+
+.menu-btn-wrap{display:flex;justify-content:flex-end;margin-bottom:10px;}
+.menu-btn{background:rgba(255,255,255,0.25);color:#fff;border:0;width:40px;height:40px;border-radius:10px;font-size:20px;cursor:pointer;display:grid;place-items:center;}
+
+.side-menu{position:fixed;inset:0;background:rgba(0,0,0,0.5);z-index:1000;display:none;backdrop-filter:blur(3px);}
+.side-menu.show{display:block;}
+.side-panel{position:fixed;top:0;left:-280px;width:280px;height:100%;background:#fff;z-index:1001;box-shadow:5px 0 25px rgba(0,0,0,0.15);transition:left 0.3s ease;display:flex;flex-direction:column;}
+.side-menu.show .side-panel{left:0;}
+.side-header{background:linear-gradient(135deg,var(--primary),var(--accent));color:#fff;padding:20px;display:flex;justify-content:space-between;align-items:center;}
+.side-header h3{margin:0;font-size:18px;}
+.close-side{background:rgba(255,255,255,0.2);color:#fff;border:0;width:32px;height:32px;border-radius:50%;font-size:16px;cursor:pointer;display:grid;place-items:center;}
+.side-body{padding:15px;overflow-y:auto;flex:1;}
+.side-item{display:flex;align-items:center;gap:12px;padding:12px 14px;color:var(--text);text-decoration:none;font-weight:700;font-size:14px;border-radius:10px;margin-bottom:6px;background:#f8faf9;transition:background 0.2s;}
+.side-item:hover{background:#e0f2ed;color:var(--primary);}
+
+.wrap{max-width:100%;width:100%;margin:auto;padding:14px 24px;}
+.searchbox{display:flex;gap:8px;width:100%;}
+input,select,textarea{font:inherit;width:100%;max-width:100%;padding:10px 12px;border:1px solid var(--border);border-radius:var(--radius);background:#fff;color:var(--text);outline:none;font-size:13px;transition:border-color .2s}
+input:focus,select:focus,textarea:focus{border-color:var(--accent);box-shadow:0 0 0 3px rgba(29,78,216,0.15)}
+.searchbox input{border:0;flex:1;min-width:0;}
+button{font:inherit;border:0;border-radius:10px;padding:10px 14px;cursor:pointer;font-weight:700;font-size:13px;transition:opacity .2s}
+button:hover{opacity:.9}
+.searchbox button,.primary{background:#123c69;color:#fff;flex-shrink:0;}
+.section-title{display:flex;justify-content:space-between;align-items:center;margin:20px 0 10px;font-size:17px;font-weight:800}
+.small{font-size:12px;color:var(--muted);font-weight:400}
+
+/* ടോഗ്ഗിൾ സെക്ഷൻ */
+.toggle-section-bar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background: #e0f2ed;
+  border: 1px solid #bbf7d0;
+  color: var(--primary);
+  padding: 10px 14px;
+  border-radius: 10px;
+  font-weight: 700;
+  font-size: 13px;
+  cursor: pointer;
+  margin-top: 10px;
+  transition: background 0.2s;
+  word-break: break-word;
+}
+.toggle-section-bar:hover { background: #dcfce7; }
+
+.collapsible-content { 
+  max-height: 0;
+  overflow: hidden;
+  transition: max-height 0.4s ease-out, padding 0.3s ease;
+  background: #fff; 
+  border: 1px solid var(--border); 
+  border-top: 0; 
+  border-radius: 0 0 10px 10px; 
+  padding: 0 12px; 
+  font-size: 13px; 
+  color: var(--text); 
+  word-break: break-word; 
+  overflow-wrap: break-word;
+}
+.collapsible-content.show {
+  max-height: 2000px;
+  padding: 14px 16px;
+  transition: max-height 0.5s ease-in, padding 0.3s ease;
+}
+
+.categories{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;width:100%;}
+.cat{background:#fff;border:1px solid #e2e9e6;border-radius:var(--radius);padding:10px 4px;text-align:center;color:var(--text);font-size:12px;box-shadow:0 2px 5px rgba(0,0,0,0.02)}
+.cat.active{background:#dbeafe;border-color:var(--accent);color:var(--primary);font-weight:800;box-shadow:0 4px 10px rgba(29,78,216,0.1)}
+.cat .symbol{font-size:22px;display:block;margin-bottom:2px}
+.cat img.cat-icon-img{width:40px;height:40px;object-fit:cover;border-radius:8px;display:block;margin:0 auto 2px;border:1px solid #d2e8e2;}
+
+.toolbar{display:flex;gap:8px;margin:12px 0;width:100%;}
+.toolbar select{flex:1;min-width:0}
+
+.cards{display:grid;gap:12px;width:100%;grid-template-columns:1fr;}
+.card{background:var(--card);padding:16px;border-radius:16px;border:1px solid #e3eae7;box-shadow:0 4px 12px rgba(23,33,31,0.04);width:100%;overflow:hidden;}
+.cardtop{display:flex;gap:12px;align-items:flex-start;width:100%;}
+.avatar{width:54px;height:54px;border-radius:12px;background:#e0f2ed;display:grid;place-items:center;font-size:20px;flex-shrink:0;overflow:hidden;border:1px solid #d2e8e2;cursor:pointer;transition:transform 0.2s;}
+.avatar:hover{transform:scale(1.03);}
+.avatar img{width:100%;height:100%;object-fit:cover;}
+.name{font-size:16px;font-weight:800;color:var(--primary);word-break:break-word;}
+.meta{font-size:12px;color:var(--muted);margin-top:6px;line-height:1.5;word-break:break-word;}
+
+.details-btn-wrap {
+  margin-top: 10px;
+  background: #f0fdf4;
+  border: 1px solid #bbf7d0;
+  border-radius: 10px;
+  padding: 10px 14px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  cursor: pointer;
+  font-weight: 700;
+  font-size: 13px;
+  color: #166534;
+  transition: background 0.2s;
+}
+.details-btn-wrap:hover { background: #dcfce7; }
+
+.visit-badge {
+  font-size: 11px;
+  color: var(--muted);
+  background: #f1f5f9;
+  padding: 4px 8px;
+  border-radius: 6px;
+  display: inline-block;
+  margin-top: 6px;
+}
+
+.actions{display:flex;gap:8px;margin-top:12px;width:100%;align-items:center;}
+.actions button{flex:1;height:42px;border-radius:10px;font-size:18px;cursor:pointer;display:grid;place-items:center;border:0;transition:opacity 0.2s, transform 0.2s;}
+.actions button:hover{opacity:.9;transform:scale(1.02);}
+.call{background:#e6f5ed;color:#08623d;}
+.wa{background:#dff7e7;color:#087b3d;}
+.map-link{background:#e0f2fe;color:#0369a1;}
+.edit-btn-icon{background:#f1f5f9;color:#475569;}
+
+.empty{text-align:center;padding:32px 16px;color:var(--muted);background:#fff;border-radius:var(--radius);border:1px dashed #d6dfdc}
+.fab{position:fixed;bottom:20px;right:20px;border-radius:50px;padding:12px 18px;background:var(--primary);color:#fff;box-shadow:0 6px 20px rgba(18,60,105,0.3);z-index:4;font-size:13px}
+footer{text-align:center;font-size:11px;color:var(--muted);padding:28px 8px 82px}
+
+.social-footer-bar {
+  background: #ffffff;
+  padding: 16px 24px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border-top: 1px solid var(--border);
+  border-bottom: 1px solid var(--border);
+  flex-wrap: wrap;
+  gap: 12px;
+}
+.social-icons { display: flex; gap: 14px; align-items: center; }
+.social-icon { width: 36px; height: 36px; border-radius: 50%; display: grid; place-items: center; color: #fff; text-decoration: none; font-size: 18px; box-shadow: 0 2px 6px rgba(0,0,0,0.15); transition: transform 0.2s; }
+.social-icon:hover { transform: scale(1.1); }
+.fb-bg { background: #1877f2; }
+.wa-bg { background: #25d366; }
+.ig-bg { background: radial-gradient(circle at 30% 107%, #fdf497 0%, #df5914 45%, #c62937 60%, #db2777 90%); }
+
+.footer-wa-link { color: var(--primary); text-decoration: none; font-weight: 700; font-size: 14px; display: flex; align-items: center; gap: 6px; background: #e6f5ed; padding: 8px 16px; border-radius: 20px; transition: background 0.2s; }
+.footer-wa-link:hover { background: #d4ede3; }
+
+.modal{position:fixed;inset:0;background:rgba(0,0,0,0.6);display:none;align-items:center;justify-content:center;z-index:10;backdrop-filter:blur(4px);padding:0;}
+.modal.show{display:flex}
+.panel{background:#fff;border-radius:0;padding:15px;width:100%;height:100%;max-width:100%;max-height:100%;overflow-y:auto;box-shadow:none;display:flex;flex-direction:column;}
+@media(min-width:768px){
+  .panel{border-radius:16px;width:100%;height:100%;max-width:100%;max-height:100%;padding:24px;}
+}
+.panel h2{margin:0 0 4px;font-size:20px;color:var(--primary)}
+.field{margin:14px 0}
+.field label{display:block;font-size:13px;font-weight:700;margin-bottom:6px;color:#2c3e3b}
+.formbuttons{display:flex;gap:10px;margin-top:20px;padding-bottom:20px;}
+.formbuttons button{flex:1;padding:12px;font-size:14px;}
+.secondary{background:#edf1ef;color:#33413c}
+
+.form-row-triple { display: grid; gap: 12px; margin: 10px 0; width: 100%; }
+@media(min-width:768px) {
+  .form-row-triple { grid-template-columns: 1fr 1fr 1fr; align-items: flex-start; }
+}
+
+.pwd-wrap{position:relative;display:flex;align-items:center;}
+.pwd-wrap input{padding-right:40px;}
+.eye-btn{position:absolute;right:10px;background:none;border:0;cursor:pointer;font-size:16px;color:var(--muted);padding:0;}
+
+.zoom-modal{position:fixed;inset:0;background:rgba(0,0,0,0.85);display:none;align-items:center;justify-content:center;z-index:100;padding:20px;backdrop-filter:blur(5px);}
+.zoom-modal.show{display:flex;}
+.zoom-content{position:relative;max-width:90%;max-height:90%;text-align:center;}
+.zoom-content img{max-width:100%;max-height:85vh;border-radius:12px;box-shadow:0 10px 30px rgba(0,0,0,0.5);object-fit:contain;}
+.zoom-close{position:absolute;top:-45px;right:0;background:#fff;color:#000;border:0;width:38px;height:38px;border-radius:50%;font-size:18px;font-weight:bold;cursor:pointer;display:grid;place-items:center;box-shadow:0 4px 10px rgba(0,0,0,0.3);}
+
+.tree-container{margin-top:12px;background:#f8faf9;border-radius:12px;padding:12px;width:100%;}
+.tree-grid{display:grid;grid-template-columns:repeat(2, 1fr);gap:10px;}
+.tree-item{background:#fff;border:1px solid #d2e8e2;border-radius:12px;padding:10px;display:flex;flex-direction:column;gap:6px;box-shadow:0 2px 5px rgba(0,0,0,0.02);}
+.sub-img{width:100%;aspect-ratio:1/1;border-radius:10px;object-fit:cover;border:1px solid #d2e8e2;background:#f3f6f5;cursor:pointer;transition:transform 0.2s;}
+.sub-img:hover{transform:scale(1.01);}
+
+.status-badge{display:inline-block;font-size:10px;padding:3px 6px;border-radius:6px;font-weight:700;margin-top:2px;}
+.status-available{background:#dcfce7;color:#166534;}
+.status-unavailable{background:#fee2e2;color:#991b1b;}
+
+.dynamic-row{background:#f9fbfb;border:1px solid #e2e8f0;padding:10px;border-radius:10px;margin-bottom:8px;display:grid;gap:8px;width:100%;}
+@media(min-width:600px){
+  .dynamic-row{grid-template-columns:1fr 1fr auto;align-items:center}
+}
+
+.sub-row{background:#f9fbfb;border:1px solid #e2e8f0;padding:10px;border-radius:10px;margin-bottom:8px;display:grid;gap:8px;width:100%;}
+@media(min-width:900px){
+  .sub-row{grid-template-columns:1.2fr 1.1fr 0.9fr 1fr 1.3fr 1fr auto;align-items:center}
+}
+
+.remove-btn { background: #0284c7; color: #fff; border-radius: 8px; padding: 8px 12px; font-size: 12px; font-weight: 700; border: 0; cursor: pointer; transition: opacity 0.2s; white-space: nowrap; }
+.remove-btn:hover { opacity: 0.9; }
+
+.custom-prompt-overlay{position:fixed;inset:0;background:rgba(0,0,0,0.6);display:none;align-items:center;justify-content:center;z-index:200;backdrop-filter:blur(3px);}
+.custom-prompt-overlay.show{display:flex;}
+.custom-prompt-box{background:#fff;padding:20px;border-radius:16px;width:90%;max-width:380px;box-shadow:0 10px 30px rgba(0,0,0,0.25);text-align:center;}
+.custom-prompt-box h3{margin:0 0 8px;font-size:17px;color:var(--primary);}
+.custom-prompt-box p{font-size:13px;color:var(--text);margin-bottom:14px;}
+.custom-prompt-box input{margin-bottom:14px;text-align:left;}
+.custom-prompt-actions{display:flex;gap:8px;}
+.custom-prompt-actions button{flex:1;padding:10px;}
+
+@media(min-width:900px){
+  .categories{grid-template-columns:repeat(12,1fr);}
+  .cards{grid-template-columns:repeat(4,1fr);}
+}
+</style>
+</head>
+<body>
+
+<header id="mainHeader">
+  <div class="header-overlay"></div>
+  <div class="header-inner">
+    <div class="header-left" style="width: 100%;">
+      <h2>എൻ.കെ നാട്ടു സേവനങ്ങൾ</h2>
+      <p>നിങ്ങളുടെ നാട്ടിലെ സേവനങ്ങൾ ഒറ്റ നോട്ടത്തിൽ</p>
+      <div class="helpline-text">Help Line No : <a href="tel:919645035303" style="color:#fff; text-decoration:underline;">9645035303</a></div>
+    </div>
+  </div>
+</header>
+
+<div class="wrap" style="padding-top: 10px;">
+  <div class="menu-btn-wrap">
+    <button class="menu-btn" onclick="toggleSideMenu()" aria-label="Menu">☰</button>
+  </div>
+  <div class="searchbox" style="margin-top:0;">
+    <input id="searchInput" placeholder="സേവനം, പേര്, സ്ഥലം തിരയുക..." aria-label="തിരയുക">
+    <button onclick="renderServices()">തിരയുക</button>
+  </div>
+
+  <div class="toggle-section-bar" onclick="toggleInfoSection()">
+    <span>തങ്ങൾക്ക് ഏത് രീതിയിൽ ഉള്ള സ്ഥാപനങ്ങൾ ആണ് കണ്ടെത്തി വിവരങ്ങൾ അറിയേണ്ടത്? അറിയുക</span>
+    <span id="infoToggleArrow">▼</span>
+  </div>
+  
+  <div class="collapsible-content" id="infoCollapsibleContent" style="line-height: 1.8;">
+    ഡാറ്റ ലോഡ് ചെയ്യുന്നു...
+  </div>
+</div>
+
+<div class="side-menu" id="sideMenu" onclick="toggleSideMenu()">
+  <div class="side-panel" onclick="event.stopPropagation()">
+    <div class="side-header">
+      <h3>വിഭവങ്ങൾ / മെനു</h3>
+      <button class="close-side" onclick="toggleSideMenu()">✕</button>
+    </div>
+    <div class="side-body">
+      <a href="#" class="side-item" onclick="toggleSideMenu(); selectCategory('all');">🏠 ഹോം പേജ് (എല്ലാം)</a>
+      <a href="#" class="side-item" onclick="toggleSideMenu(); openModal();">＋ പുതിയ സ്ഥാപനം ചേർക്കുക</a>
+      <button type="button" onclick="location.href='tel:9645035303'" class="side-item" style="width:100%; border:0; background:#f8faf9; text-align:left; cursor:pointer;">📞 ഹെൽപ്പ് ലൈൻ വിളിക്കുക</button>
+    </div>
+  </div>
+</div>
+
+<main class="wrap" style="padding-top: 0;">
+  <div class="section-title">സേവന വിഭാഗങ്ങൾ <span class="small">വിഭാഗം തിരഞ്ഞെടുക്കുക</span></div>
+  <div class="categories" id="categories"></div>
+  <div class="section-title">സേവനങ്ങൾ <span class="small" id="resultCount"></span></div>
+  <div class="toolbar">
+    <select id="areaFilter" aria-label="സ്ഥലം അനുസരിച്ച് ഫിൽട്ടർ" onchange="renderServices()">
+      <option value="">എല്ലാ സ്ഥലങ്ങളും</option>
+    </select>
+    <select id="sortFilter" aria-label="ക്രമീകരണം" onchange="renderServices()">
+      <option value="nearest">ഏറ്റവും അടുത്തുള്ളവ ആദ്യം</option>
+      <option value="name">പേര് അനുസരിച്ച്</option>
+      <option value="newest">പുതിയവ ആദ്യം</option>
+    </select>
+  </div>
+  <div class="cards" id="serviceList">ഡാറ്റ ലോഡ് ചെയ്യുന്നു...</div>
+</main>
+
+<div id="bottomNoticeContainer" class="wrap" style="padding-top:0; display:none;"></div>
+
+<div class="social-footer-bar">
+  <div class="social-icons">
+    <a href="https://facebook.com" target="_blank" rel="noopener" class="social-icon fb-bg" title="Facebook">f</a>
+    <a href="#" onclick="openWhatsApp(event, '9645035303', 'നമസ്കാരം, എനിക്ക് NK നാട്ടുസേവനങ്ങൾ വഴി ബന്ധപ്പെടണം.')" class="social-icon wa-bg" title="WhatsApp">💬</a>
+    <a href="https://instagram.com" target="_blank" rel="noopener" class="social-icon ig-bg" title="Instagram">📷</a>
+  </div>
+  <div>
+    <button type="button" onclick="openWhatsApp(event, '9645035303', 'നമസ്കാരം, എനിക്ക് NK നാട്ടുസേവനങ്ങൾ വഴി ബന്ധപ്പെടണം.')" class="footer-wa-link" style="border:0; cursor:pointer;">
+      <span>📞</span> WhatsApp വഴി ബന്ധപ്പെടുക
+    </button>
+  </div>
+</div>
+
+<div style="background:#e6f5ed; border-top:1px solid var(--border); border-bottom:1px solid var(--border); padding:12px 24px; display:flex; justify-content:space-between; align-items:center; font-weight:bold; font-size:14px; color:var(--primary);">
+  <span>NK</span>
+  <span>📞 <button type="button" onclick="location.href='tel:9645035303'" style="background:none; border:0; color:var(--primary); text-decoration:underline; font-weight:bold; cursor:pointer; padding:0;">9645035303</button></span>
+</div>
+
+<footer>നാട്ടുസേവനങ്ങൾ · വിവരങ്ങൾ ചേർക്കുന്നതിന് മുമ്പ് കൃത്യത പരിശോധിക്കുക.<br>അടിയന്തര സേവനങ്ങൾക്ക് ഔദ്യോഗിക നമ്പറുകൾ സ്ഥിരീകരിച്ചശേഷം മാത്രം ഉപയോഗിക്കുക.</footer>
+<button class="fab" onclick="openModal()">＋ സ്ഥാപനം ചേർക്കുക</button>
+
+<div class="modal" id="detailsModal" role="dialog" aria-modal="true">
+  <div class="panel" style="width:100% !important; height:100% !important; max-width:100% !important; max-height:100% !important; border-radius:0 !important; padding:15px;">
+    <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:12px; border-bottom:1px solid var(--border); padding-bottom:10px;">
+      <h2 id="detailsModalTitle" style="font-size:18px; margin:0;">സ്ഥാപനം</h2>
+      <button type="button" onclick="closeDetailsModal()" style="background:#fee2e2; color:#991b1b; border-radius:50%; width:36px; height:36px; font-size:16px; display:grid; place-items:center; border:0; cursor:pointer;">✕</button>
+    </div>
+    <div id="detailsModalContent" style="overflow-y:auto; flex:1;"></div>
+  </div>
+</div>
+
+<div class="custom-prompt-overlay" id="pwdModal">
+  <div class="custom-prompt-box" style="text-align:left;">
+    <h3>സ്റ്റോക്ക് പരിശോധന</h3>
+    <p style="font-size:12px; color:var(--muted); margin-bottom:10px;">ഈ സ്ഥാപനത്തിന്റെ സ്റ്റോക്ക് മാറ്റാൻ പാസ്‌വേഡ് നൽകുക:</p>
+    <div class="pwd-wrap" style="margin-bottom:14px;">
+      <input type="password" id="checkOwnerPassword" placeholder="പാസ്‌വേഡ് നൽകുക">
+      <button type="button" class="eye-btn" onclick="togglePasswordVisibility('checkOwnerPassword', this)">👁️</button>
+    </div>
+    <div class="custom-prompt-actions">
+      <button type="button" class="secondary" onclick="closePwdModal()">റദ്ദാക്കുക</button>
+      <button type="button" class="primary" onclick="confirmEditPassword()">പരിശോധിക്കുക</button>
+    </div>
+  </div>
+</div>
+
+<div class="custom-prompt-overlay" id="customAlertModal">
+  <div class="custom-prompt-box">
+    <h3 id="customAlertTitle">സന്ദേശം</h3>
+    <p id="customAlertText" style="margin-bottom:16px;"></p>
+    <button type="button" class="primary" onclick="closeCustomAlert()" style="width:100%;">ശരി</button>
+  </div>
+</div>
+
+<div class="zoom-modal" id="zoomModal" onclick="closeZoom(event)">
+  <div class="zoom-content" onclick="event.stopPropagation()">
+    <button class="zoom-close" onclick="closeZoom()">✕</button>
+    <img id="zoomImage" src="" alt="Zoomed Image">
+  </div>
+</div>
+
+<div class="custom-prompt-overlay" id="unitModal">
+  <div class="custom-prompt-box" style="text-align:left;">
+    <h3>പുതിയ യൂണിറ്റ് ചേർക്കുക</h3>
+    <input type="text" id="newUnitInput" placeholder="യൂണിറ്റിന്റെ പേര് എഴുതുക">
+    <div class="custom-prompt-actions">
+      <button type="button" class="secondary" onclick="closeUnitModal()">റദ്ദാക്കുക</button>
+      <button type="button" class="primary" onclick="confirmNewUnit()">ചേർക്കുക</button>
+    </div>
+  </div>
+</div>
+
+<div class="modal" id="serviceModal" role="dialog" aria-modal="true" aria-labelledby="formTitle">
+  <div class="panel" style="max-width:100%; height:100%; border-radius:0 !important;">
+    <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:10px;">
+      <h2 id="formTitle">പുതിയ സ്ഥാപനം ചേർക്കുക</h2>
+      <button type="button" onclick="closeModal()" style="background:#fee2e2; color:#991b1b; border-radius:50%; width:34px; height:34px; font-size:15px; display:grid; place-items:center; border:0; cursor:pointer;">✕</button>
+    </div>
+    <div class="small" style="margin-bottom: 14px;" id="formSubtitle">വിവരങ്ങൾ പൂരിപ്പിച്ച് സമർപ്പിക്കുക. അഡ്മിന്റെ പരിശോധനയ്ക്ക് ശേഷം പ്രസിദ്ധീകരിക്കുന്നതാണ്.</div>
+    
+    <form id="serviceForm" style="flex:1; display:flex; flex-direction:column;">
+      <input type="hidden" id="editServiceId" value="">
+
+      <div class="form-row-triple">
+        <div class="field" style="margin:0;">
+          <label for="ownerPassword">പാസ്‌വേഡ് (Owner Password) *</label>
+          <div class="pwd-wrap">
+            <input type="password" id="ownerPassword" placeholder="പാസ്‌വേഡ് നൽകുക" required>
+            <button type="button" class="eye-btn" onclick="togglePasswordVisibility('ownerPassword', this)">👁️</button>
+          </div>
+          <small class="text-muted" style="font-size:10px;">സ്റ്റോക്ക് മാറ്റാൻ ആവശ്യമാണ്.</small>
+        </div>
+
+        <div class="field" style="margin:0;">
+          <label for="sCategory">സേവന വിഭാഗം *</label>
+          <select id="sCategory" required></select>
+        </div>
+
+        <div class="field" style="margin:0;">
+          <label for="sImage">സ്ഥാപനത്തിന്റെ ഫോട്ടോ (Image)</label>
+          <input type="file" id="mainImageFile" accept="image/*" style="padding:6px; font-size:12px; margin-bottom:6px;">
+          <input type="hidden" id="existingImage" value="">
+        </div>
+      </div>
+
+      <div class="field" style="margin:10px 0;">
+        <label style="color:var(--primary); font-size:13px; font-weight:bold;">സ്ഥാപനത്തിന്റെ വിവരങ്ങൾ (Fields) *</label>
+        <div id="dynamicFormFields"></div>
+        <button type="button" class="secondary" onclick="addDynamicField()" style="margin-top:6px;padding:8px 12px;font-size:12px;width:100%;">＋ പുതിയ ഫീൽഡ് ചേർക്കുക</button>
+      </div>
+
+      <div class="field" style="margin:15px 0;">
+        <label style="color:var(--primary); font-size:13px; font-weight:bold;">📍 Google Map ലൊക്കേഷൻ സെറ്റ് ചെയ്യുക</label>
+        <div style="font-size:11px; color:var(--muted); margin-bottom:6px;">നിങ്ങളുടെ നിലവിലെ ലൊക്കേഷൻ എടുക്കുകയോ അല്ലെങ്കിൽ മാപ്പ് ലിങ്ക് താഴെ നൽകുകയോ ചെയ്യാം.</div>
+        <div style="display:flex; gap:8px; margin-bottom:8px;">
+          <input type="text" id="mapLinkInput" placeholder="Google Map Link ഇവിടെ നൽകുക" style="flex:1;">
+          <button type="button" class="secondary" onclick="getCurrentLocation()" style="font-size:11px; white-space:nowrap;">📍 എന്റെ ലൊക്കേഷൻ എടുക്കുക</button>
+        </div>
+        <div id="mapPickerContainer" style="width:100%; height:220px; border-radius:10px; overflow:hidden; border:1px solid var(--border); background:#e5e3df;">
+          <iframe id="mapIframe" width="100%" height="100%" style="border:0;" allowfullscreen="" loading="lazy" src="https://maps.google.com/maps?q=Angadipuram,Kerala&z=14&output=embed"></iframe>
+        </div>
+      </div>
+
+      <div class="field" style="margin:10px 0;">
+        <label style="color:var(--primary); font-size:13px; font-weight:bold;">കീഴിലുള്ള ഐറ്റങ്ങൾ / ഉൽപ്പന്നങ്ങൾ & സ്റ്റോക്ക് (Sub Items)</label>
+        <div id="treeItemsContainer"></div>
+        <button type="button" class="secondary" onclick="addTreeItem()" style="margin-top:6px;padding:8px 12px;font-size:12px;width:100%;">＋ പുതിയ ഐറ്റം ചേർക്കുക</button>
+      </div>
+
+      <div class="field" style="margin:10px 0;">
+        <label for="sDesc">സേവനത്തെക്കുറിച്ച് (വിവരണം)</label>
+        <textarea id="sDesc" rows="2" maxlength="300" placeholder="സേവന വിവരങ്ങൾ"></textarea>
+      </div>
+
+      <div id="formMessage" class="hidden"></div>
+      
+      <div class="formbuttons">
+        <button type="button" class="secondary" onclick="closeModal()">റദ്ദാക്കുക</button>
+        <button type="submit" id="submitBtn" class="primary">സമർപ്പിക്കുക</button>
+      </div>
+    </form>
+  </div>
+</div>
+
+<script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-app-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-database-compat.js"></script>
+
+<script>
+const firebaseConfig = {
+ apiKey: "AIzaSyC6TdRrBFzOBXgzE4wnwWBeXdYXjgXrrB8",
+ authDomain: "nkcostomersuport.firebaseapp.com",
+ databaseURL: "https://nkcostomersuport-default-rtdb.firebaseio.com",
+ projectId: "nkcostomersuport",
+ storageBucket: "nkcostomersuport.firebasestorage.app",
+ messagingSenderId: "156284504908",
+ appId: "1:156284504908:web:2f2f569a7c70c188b1dde9",
+ measurementId: "G-BWGG3YR0F8"
+};
+
+firebase.initializeApp(firebaseConfig);
+const db = firebase.database();
+const ROOT = "nk_local_services";
+
+let categoriesData = {};
+let services = {};
+let selectedCategory = "all";
+let activeUnitSelect = null;
+let pendingEditId = null;
+let userCoords = null;
+
+let defaultUnits = [
+  "എണ്ണം", "സെന്റ്", "ഏക്കർ", "Square fit", "Meeter", "Kg", "Litter", "പീസ്", "ബോക്സ്"
+];
+
+const $ = id => document.getElementById(id);
+
+function showCustomAlert(title, text) {
+  $("customAlertTitle").textContent = title;
+  $("customAlertText").textContent = text;
+  $("customAlertModal").classList.add("show");
+}
+
+function closeCustomAlert() {
+  $("customAlertModal").classList.remove("show");
+}
+
+function toggleSideMenu() {
+  $("sideMenu").classList.toggle("show");
+}
+
+function toggleInfoSection() {
+  const content = $("infoCollapsibleContent");
+  const arrow = $("infoToggleArrow");
+  
+  content.classList.toggle("show");
+  if(content.classList.contains("show")) {
+    arrow.textContent = "▲";
+  } else {
+    arrow.textContent = "▼";
+  }
+}
+
+function togglePasswordVisibility(fieldId, btnElem) {
+  const pwdInput = $(fieldId);
+  if (pwdInput.type === "password") {
+    pwdInput.type = "text";
+    btnElem.textContent = "👁️‍🗨️";
+  } else {
+    pwdInput.type = "password";
+    btnElem.textContent = "👁️";
+  }
+}
+
+// കമ്പ്യൂട്ടറിലും ബ്രൗസറിലും വാട്സാപ്പ് തുറക്കാൻ (새로운 탭 - New Tab)
+function openWhatsApp(e, phone, customMessage = "") {
+  if(e) e.preventDefault();
+  let cleanPhone = String(phone || "").replace(/\D/g, "");
+  if(cleanPhone.length === 10) cleanPhone = "91" + cleanPhone;
+  
+  let msg = encodeURIComponent(customMessage || "നമസ്കാരം, എനിക്ക് NK നാട്ടുസേവനങ്ങൾ വഴി ബന്ധപ്പെടണം.");
+  let url = "https://wa.me/" + cleanPhone + "?text=" + msg;
+  window.open(url, '_blank');
+}
+
+// കമ്പ്യൂട്ടറിലും ബ്രൗസറിലും ഗൂഗിൾ മാപ്പ് തുറക്കാൻ (New Tab)
+function openMapLink(mapUrl, defaultQuery) {
+  let finalUrl = mapUrl;
+  if (!finalUrl) {
+    finalUrl = `https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(defaultQuery)}`;
+  } else if (!finalUrl.startsWith('http://') && !finalUrl.startsWith('https://')) {
+    finalUrl = `https://${finalUrl}`;
+  }
+  window.open(finalUrl, '_blank');
+}
+
+function initApp(){
+  if (navigator.geolocation) {
+    navigator.geolocation.getCurrentPosition(position => {
+      userCoords = {
+        lat: position.coords.latitude,
+        lng: position.coords.longitude
+      };
+      renderServices();
+    }, () => {
+      renderServices();
+    });
+  }
+
+  db.ref(ROOT+"/categories").on("value", snap => {
+    categoriesData = snap.val() || {};
+    renderCategories();
+    renderServices();
+  });
+
+  db.ref(ROOT+"/services").on("value", snap => {
+    services = snap.val() || {};
+    renderAreas();
+    renderServices();
+  });
+
+  db.ref(ROOT+"/settings/headerBg").on("value", snap => {
+    if(snap.val()) {
+      $("mainHeader").style.backgroundImage = `url('${snap.val()}')`;
+    } else {
+      $("mainHeader").style.backgroundImage = "none";
+    }
+  });
+
+  db.ref(ROOT+"/settings/topNotice").on("value", snap => {
+    const val = snap.val() || "";
+    const container = $("infoCollapsibleContent");
+    if(val.trim()) {
+      container.innerHTML = val;
+    } else {
+      container.innerHTML = "<div style='padding:10px; color:var(--muted);'>വിവരങ്ങൾ ലഭ്യമല്ല. അഡ്മിൻ പാനൽ വഴി ചേർക്കുക.</div>";
+    }
+  });
+
+  db.ref(ROOT+"/settings/bottomNotice").on("value", snap => {
+    const val = snap.val() || "";
+    const container = $("bottomNoticeContainer");
+    if(val.trim()) {
+      container.innerHTML = val;
+      container.style.display = "block";
+    } else {
+      container.style.display = "none";
+    }
+  });
+}
+
+function renderCategories(){
+  const box = $("categories");
+  let html = `<button class="cat ${selectedCategory === 'all' ? 'active' : ''}" onclick="selectCategory('all')">
+    <span class="symbol">▦</span>എല്ലാം
+  </button>`;
+
+  Object.entries(categoriesData).forEach(([id, c]) => {
+    if(c && c.name){
+      let iconSymbol = `<span class="symbol">📌</span>`;
+      if(c.image){
+        iconSymbol = `<img src="${c.image}" class="cat-icon-img" alt="">`;
+      }
+      html += `<button class="cat ${selectedCategory === id ? 'active' : ''}" onclick="selectCategory('${id}')">
+        ${iconSymbol}${escapeHtml(c.name)}
+      </button>`;
+    }
+  });
+  box.innerHTML = html;
+
+  const selectBox = $("sCategory");
+  selectBox.innerHTML = '<option value="">വിഭാഗം തിരഞ്ഞെടുക്കുക</option>' + 
+    Object.entries(categoriesData).filter(([id, c]) => c && c.name).map(([id, c]) => 
+      `<option value="${escapeHtml(c.name)}" data-id="${id}">${escapeHtml(c.name)}</option>`
+    ).join("");
+}
+
+function addDynamicField(labelVal="", valueVal=""){
+  const container = $("dynamicFormFields");
+  const row = document.createElement("div");
+  row.className = "dynamic-row";
+  row.innerHTML = `
+    <input type="text" placeholder="ഫീൽഡ് പേര് (ഉദാ: Phone No)" value="${escapeHtml(labelVal)}" class="dyn-label" required>
+    <input type="text" placeholder="വിവരം (ഉദാ: 9645035303)" value="${escapeHtml(valueVal)}" class="dyn-value" required>
+    <button type="button" class="remove-btn" onclick="this.parentElement.remove()">Remove</button>
+  `;
+  container.appendChild(row);
+}
+
+function addTreeItem(itemName="", itemDesc="", itemStatus="available", itemCount="1", itemUnit="എണ്ണം", itemNote="", itemImg=""){
+  const container = $("treeItemsContainer");
+  const row = document.createElement("div");
+  row.className = "sub-row";
+
+  let unitOptions = defaultUnits.map(u => `<option value="${u}" ${itemUnit === u ? 'selected' : ''}>${u}</option>`).join("");
+  if(itemUnit && !defaultUnits.includes(itemUnit)) {
+    unitOptions += `<option value="${escapeHtml(itemUnit)}" selected>${escapeHtml(itemUnit)}</option>`;
+  }
+
+  row.innerHTML = `
+    <input type="text" placeholder="ഐറ്റം പേര്" value="${escapeHtml(itemName)}" class="tree-name" required>
+    <input type="text" placeholder="വിവരം / വാടക" value="${escapeHtml(itemDesc)}" class="tree-desc" required>
+    <select class="tree-status" style="padding:8px; border-radius:8px;" onchange="toggleCountInput(this)">
+      <option value="available" ${itemStatus === 'available' ? 'selected' : ''}>Available</option>
+      <option value="unavailable" ${itemStatus === 'unavailable' ? 'selected' : ''}>Not available</option>
+    </select>
+    <div style="display:flex; gap:4px; align-items:center;">
+      <input type="number" placeholder="അളവ്" value="${escapeHtml(itemCount)}" min="0" class="tree-count" style="padding:8px; border-radius:8px; width:60%;" ${itemStatus === 'unavailable' ? 'disabled' : ''}>
+      <select class="tree-unit" style="padding:8px 2px; border-radius:8px; width:40%; font-size:11px;" onchange="checkNewUnit(this)">
+        ${unitOptions}
+        <option value="ADD_NEW">＋ പുതിയത്</option>
+      </select>
+    </div>
+    <input type="text" placeholder="Notes (കുറിപ്പുകൾ)" value="${escapeHtml(itemNote)}" class="tree-note" style="padding:8px; border-radius:8px;">
+    <div>
+      <input type="file" accept="image/*" class="tree-img-file" style="padding:2px;font-size:10px;">
+      <input type="hidden" class="tree-img-base64" value="${escapeHtml(itemImg)}">
+    </div>
+    <button type="button" class="remove-btn" onclick="this.parentElement.remove()">Remove</button>
+  `;
+  container.appendChild(row);
+}
+
+function checkNewUnit(selectElem) {
+  if (selectElem.value === "ADD_NEW") {
+    activeUnitSelect = selectElem;
+    $("newUnitInput").value = "";
+    $("unitModal").classList.add("show");
+    $("newUnitInput").focus();
+  }
+}
+
+function closeUnitModal() {
+  $("unitModal").classList.remove("show");
+  if(activeUnitSelect) {
+    activeUnitSelect.value = "എണ്ണം";
+    activeUnitSelect = null;
+  }
+}
+
+function confirmNewUnit() {
+  const val = $("newUnitInput").value.trim();
+  if(val) {
+    if(!defaultUnits.includes(val)) defaultUnits.push(val);
+    document.querySelectorAll(".tree-unit").forEach(sel => {
+      let html = defaultUnits.map(u => `<option value="${u}">${u}</option>`).join("");
+      html += `<option value="ADD_NEW">＋ പുതിയത്</option>`;
+      sel.innerHTML = html;
+    });
+    if(activeUnitSelect) activeUnitSelect.value = val;
+  } else if(activeUnitSelect) {
+    activeUnitSelect.value = "എണ്ണം";
+  }
+  $("unitModal").classList.remove("show");
+  activeUnitSelect = null;
+}
+
+function toggleCountInput(selectElem) {
+  const row = selectElem.closest('.sub-row');
+  const countInput = row.querySelector('.tree-count');
+  if (selectElem.value === 'unavailable') {
+    countInput.value = "0";
+    countInput.disabled = true;
+  } else {
+    countInput.disabled = false;
+    if(countInput.value == "0") countInput.value = "1";
+  }
+}
+
+function selectCategory(id){
+  selectedCategory = id;
+  renderCategories();
+  renderServices();
+}
+
+function renderAreas(){
+  const current = $("areaFilter").value;
+  const areaSet = new Set();
+  Object.values(services).forEach(s => {
+    if(s && s.customData) {
+      for(let k in s.customData) {
+        if(k.toLowerCase().includes('place') || k.toLowerCase().includes('സ്ഥലം')) {
+          if(s.customData[k]) areaSet.add(s.customData[k]);
+        }
+      }
+    }
+  });
+  const areas = [...areaSet].sort();
+  $("areaFilter").innerHTML = '<option value="">എല്ലാ സ്ഥലങ്ങളും</option>' + areas.map(a => `<option value="${escapeHtml(a)}">${escapeHtml(a)}</option>`).join("");
+  if(areas.includes(current)) $("areaFilter").value = current;
+}
+
+function escapeHtml(value){
+  return String(value ?? "").replace(/[&<>"']/g, c => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" }[c]));
+}
+
+function safePhone(phone){
+  return String(phone || "").replace(/\D/g, "");
+}
+
+function openZoom(imgSrc) {
+  if(!imgSrc) return;
+  $("zoomImage").src = imgSrc;
+  $("zoomModal").classList.add("show");
+}
+
+function closeZoom() {
+  $("zoomModal").classList.remove("show");
+  $("zoomImage").src = "";
+}
+
+function getCurrentLocation() {
+  if (navigator.geolocation) {
+    navigator.geolocation.getCurrentPosition(position => {
+      const lat = position.coords.latitude;
+      const lng = position.coords.longitude;
+      const mapUrl = `https://www.google.com/maps?q=${lat},${lng}`;
+      $("mapLinkInput").value = mapUrl;
+      $("mapIframe").src = `https://maps.google.com/maps?q=${lat},${lng}&z=15&output=embed`;
+      showCustomAlert("വിജയം", "ലൊക്കേഷൻ വിജയകരമായി എടുത്തു!");
+    }, () => {
+      showCustomAlert("പിശക്", "ലൊക്കേഷൻ എടുക്കാൻ സാധിച്ചില്ല.");
+    });
+  }
+}
+
+function calculateDistance(lat1, lon1, lat2, lon2) {
+  const R = 6371;
+  const dLat = (lat2 - lat1) * (Math.PI/180);
+  const dLon = (lon2 - lon1) * (Math.PI/180);
+  const a = Math.sin(dLat/2) * Math.sin(dLat/2) + Math.cos(lat1 * (Math.PI/180)) * Math.cos(lat2 * (Math.PI/180)) * Math.sin(dLon/2) * Math.sin(dLon/2);
+  return R * (2 * Math.atan2(Math.sqrt(a), Math.sqrt(1-a)));
+}
+
+function extractCoords(mapLink) {
+  if(!mapLink) return null;
+  const match = mapLink.match(/[@\?](-?\d+\.\d+),(-?\d+\.\d+)/);
+  return (match && match[1] && match[2]) ? { lat: parseFloat(match[1]), lng: parseFloat(match[2]) } : null;
+}
+
+function openDetailsModal(id) {
+  const s = services[id];
+  if(!s) return;
+  db.ref(ROOT + "/services/" + id + "/visitCount").set((s.visitCount || 0) + 1);
+
+  let displayName = "സ്ഥാപനം";
+  if(s.customData) {
+    for(let k in s.customData) {
+      if(k.toLowerCase().includes('company') || k.toLowerCase().includes('name') || k.toLowerCase().includes('പേര്')) displayName = s.customData[k];
+    }
+  }
+  $("detailsModalTitle").textContent = displayName;
+  
+  let treeHtml = '<div class="empty">ഐറ്റങ്ങൾ ലഭ്യമല്ല.</div>';
+  if(s.treeItems && Array.isArray(s.treeItems) && s.treeItems.length > 0){
+    treeHtml = `<div class="tree-container"><div class="tree-grid">`;
+    s.treeItems.forEach(ti => {
+      let subImgHtml = ti.image ? `<img src="${ti.image}" class="sub-img" alt="" onclick="openZoom('${ti.image}')">` : `<div class="sub-img" style="display:grid;place-items:center;font-size:24px;">📦</div>`;
+      let countVal = ti.status === 'unavailable' ? 0 : (ti.count !== undefined ? ti.count : 1);
+      let statusBadge = (ti.status === 'unavailable' || countVal <= 0) ? `<span class="status-badge status-unavailable">Not available (0)</span>` : `<span class="status-badge status-available">Available (${countVal} ${ti.unit || "എണ്ണം"})</span>`;
+      let noteHtml = ti.note ? `<div style="font-size:11px;color:#08623d;margin-top:2px;">📝 Note: ${escapeHtml(ti.note)}</div>` : "";
+
+      treeHtml += `<div class="tree-item">${subImgHtml}<div style="font-weight:700;font-size:13px;margin-top:4px;">${escapeHtml(ti.name)}</div><div style="font-size:12px;color:var(--muted);">${escapeHtml(ti.desc)}</div>${noteHtml}<div>${statusBadge}</div></div>`;
+    });
+    treeHtml += `</div></div>`;
+  }
+  $("detailsModalContent").innerHTML = treeHtml;
+  $("detailsModal").classList.add("show");
+}
+
+function closeDetailsModal() { $("detailsModal").classList.remove("show"); }
+
+function renderServices(){
+  const q = $("searchInput").value.trim().toLowerCase();
+  const area = $("areaFilter").value;
+  const sortMode = $("sortFilter") ? $("sortFilter").value : "nearest";
+  const todayStr = new Date().toISOString().split('T')[0];
+  
+  const entries = Object.entries(services).filter(([id, s]) => {
+    if(!s || s.isBlocked === true || (s.expireDate && s.expireDate < todayStr)) return false;
+    let textStr = (s.category || "") + " " + (s.description || "");
+    if(s.customData) textStr += " " + Object.values(s.customData).join(" ");
+    const text = textStr.toLowerCase();
+    let matchCat = (selectedCategory === "all") || (s.category === categoriesData[selectedCategory]?.name);
+    let matchArea = !area;
+    if(area && s.customData) {
+      for(let k in s.customData) {
+        if((k.toLowerCase().includes('place') || k.toLowerCase().includes('സ്ഥലം')) && String(s.customData[k]).toLowerCase() === area.toLowerCase()) matchArea = true;
+      }
+    }
+    return matchCat && matchArea && (!q || text.includes(q));
+  });
+
+  entries.sort((a, b) => {
+    const sA = a[1], sB = b[1];
+    if (sortMode === "nearest") {
+      let distA = Infinity, distB = Infinity;
+      if (userCoords) {
+        let c1 = extractCoords(sA.mapLink), c2 = extractCoords(sB.mapLink);
+        if (c1) distA = calculateDistance(userCoords.lat, userCoords.lng, c1.lat, c1.lng);
+        if (c2) distB = calculateDistance(userCoords.lat, userCoords.lng, c2.lat, c2.lng);
+      }
+      return distA !== distB ? distA - distB : (sB.approvedAt || 0) - (sA.approvedAt || 0);
+    }
+    return (sB.approvedAt || 0) - (sA.approvedAt || 0);
+  });
+
+  $("resultCount").textContent = entries.length + " എണ്ണം";
+  const box = $("serviceList");
+  if(!entries.length){ box.innerHTML = '<div class="empty">സേവനങ്ങൾ കണ്ടെത്താനായില്ല.</div>'; return; }
+
+  box.innerHTML = entries.map(([id, s]) => {
+    let phone = "", displayName = "സ്ഥാപനം", placeVal = "", mapUrl = s.mapLink || "";
+    if(s.customData) {
+      Object.entries(s.customData).forEach(([k, v]) => {
+        let kl = k.toLowerCase();
+        if(kl.includes('phone') || kl.includes('നമ്പർ') || kl.includes('ഫോൺ')) phone = safePhone(v);
+        if(kl.includes('company') || kl.includes('name') || kl.includes('പേര്')) displayName = v;
+        if(kl.includes('place') || kl.includes('സ്ഥലം')) placeVal = v;
+      });
+    }
+
+    let avatarContent = s.image ? `<img src="${s.image}" alt="" onclick="openZoom('${s.image}')">` : "🛠️";
+    let customDataHtml = "";
+    if(s.customData){
+      Object.entries(s.customData).forEach(([k, v]) => {
+        if(!k.toLowerCase().includes('name') && !k.toLowerCase().includes('പേര്')) customDataHtml += `<b>${escapeHtml(k)}:</b> ${escapeHtml(v)}<br>`;
+      });
+    }
+
+    let detailsBtnHtml = (s.treeItems && s.treeItems.length > 0) ? `<div class="details-btn-wrap" onclick="openDetailsModal('${id}')"><span>📂 Details</span><span>➔</span></div>` : "";
+    
+    let waMsg = `നമസ്കാരം, ${displayName} സംബന്ധിച്ച് ബന്ധപ്പെടാൻ വിളിച്ചതാണ്.`;
+
+    return `<article class="card">
+      <div class="cardtop">
+        <div class="avatar">${avatarContent}</div>
+        <div style="flex:1;min-width:0">
+          <div class="name">${escapeHtml(displayName)}</div>
+          <div class="meta">${customDataHtml}${escapeHtml(s.description || "")}</div>
+          <div class="visit-badge">👀 സന്ദർശനങ്ങൾ: ${s.visitCount || 0} തവണ</div>
+        </div>
+      </div>
+      ${detailsBtnHtml}
+      <div class="actions">
+        <button type="button" class="call" onclick="location.href='tel:${phone}'">📞</button>
+        <button type="button" class="wa" onclick="openWhatsApp(event, '${phone}', '${waMsg}')">💬</button>
+        <button type="button" class="map-link" onclick="openMapLink('${escapeHtml(mapUrl)}', '${escapeHtml(displayName + (placeVal ? ", " + placeVal : ""))}')">🗺️</button>
+        <button type="button" class="edit-btn-icon" onclick="promptEditModal('${id}')">⚙️</button>
+      </div>
+    </article>`;
+  }).join("");
+}
+
+function openModal(){ 
+  $("editServiceId").value = "";
+  $("formTitle").textContent = "പുതിയ സ്ഥാപനം ചേർക്കുക";
+  $("serviceModal").classList.add("show"); 
+  if($("dynamicFormFields").children.length === 0){
+    addDynamicField("Company Name", "");
+    addDynamicField("Place", "");
+    addDynamicField("Phone No", "");
+  }
+}
+
+function promptEditModal(id) {
+  pendingEditId = id;
+  $("checkOwnerPassword").value = "";
+  $("pwdModal").classList.add("show");
+}
+
+function closePwdModal() { $("pwdModal").classList.remove("show"); }
+
+function confirmEditPassword() {
+  if($("checkOwnerPassword").value.trim() !== services[pendingEditId]?.ownerPassword) {
+    showCustomAlert("പിശക്", "❌ തെറ്റായ പാസ്‌വേഡ്!");
+    return;
+  }
+  closePwdModal();
+  openEditModal(pendingEditId);
+}
+
+function openEditModal(id){
+  const s = services[id];
+  if(!s) return;
+  $("editServiceId").value = id;
+  $("formTitle").textContent = "സ്ഥാപന വിവരങ്ങൾ മാറ്റുക";
+  $("ownerPassword").value = s.ownerPassword || "";
+  $("sCategory").value = s.category || "";
+  $("sDesc").value = s.description || "";
+  $("existingImage").value = s.image || "";
+  $("mainImageFile").value = "";
+  $("mapLinkInput").value = s.mapLink || "";
+
+  $("dynamicFormFields").innerHTML = "";
+  if(s.customData) Object.entries(s.customData).forEach(([k, v]) => addDynamicField(k, v));
+
+  $("treeItemsContainer").innerHTML = "";
+  if(s.treeItems) s.treeItems.forEach(ti => addTreeItem(ti.name, ti.desc, ti.status, ti.count, ti.unit, ti.note, ti.image));
+
+  $("serviceModal").classList.add("show");
+}
+
+function closeModal(){ 
+  $("serviceModal").classList.remove("show"); 
+  $("serviceForm").reset();
+  $("dynamicFormFields").innerHTML = "";
+  $("treeItemsContainer").innerHTML = "";
+}
+
+$("serviceModal").addEventListener("click", e => { if(e.target === $("serviceModal")) closeModal(); });
+$("searchInput").addEventListener("input", renderServices);
+
+$("serviceForm").addEventListener("submit", async e => {
+  e.preventDefault();
+  const ownerPassword = $("ownerPassword").value.trim();
+  const category = $("sCategory").value;
+  const description = $("sDesc").value.trim();
+  const editId = $("editServiceId").value;
+  const mapLink = $("mapLinkInput").value.trim();
+
+  if(!category || !ownerPassword){ showCustomAlert("അറിയിപ്പ്", "വിഭാഗവും പാസ്‌വേഡും നൽകുക."); return; }
+
+  const customData = {};
+  document.querySelectorAll("#dynamicFormFields .dynamic-row").forEach(row => {
+    customData[row.querySelector(".dyn-label").value.trim()] = row.querySelector(".dyn-value").value.trim();
+  });
+
+  const submitBtn = $("submitBtn");
+  submitBtn.disabled = true;
+  submitBtn.textContent = "സേവ് ചെയ്യുന്നു...";
+
+  let mainImageUrl = $("existingImage").value;
+  const mainFile = $("mainImageFile").files[0];
+  if(mainFile) {
+    mainImageUrl = await new Promise(r => { let reader = new FileReader(); reader.onload = e => r(e.target.result); reader.readAsDataURL(mainFile); });
+  }
+
+  const treeItems = [];
+  for(let row of document.querySelectorAll("#treeItemsContainer .sub-row")) {
+    let subImg = row.querySelector(".tree-img-base64").value;
+    const f = row.querySelector(".tree-img-file").files[0];
+    if(f) {
+      subImg = await new Promise(r => { let reader = new FileReader(); reader.onload = e => r(e.target.result); reader.readAsDataURL(f); });
+    }
+    treeItems.push({
+      name: row.querySelector(".tree-name").value.trim(),
+      desc: row.querySelector(".tree-desc").value.trim(),
+      status: row.querySelector(".tree-status").value,
+      count: row.querySelector(".tree-status").value === 'unavailable' ? 0 : parseInt(row.querySelector(".tree-count").value) || 0,
+      unit: row.querySelector(".tree-unit").value,
+      note: row.querySelector(".tree-note").value.trim(),
+      image: subImg
+    });
+  }
+
+  const payload = {
+    ownerPassword, category, description, customData, treeItems,
+    image: mainImageUrl, mapLink,
+    approvedAt: editId ? (services[editId].approvedAt || Date.now()) : Date.now(),
+    visitCount: editId ? (services[editId].visitCount || 0) : 0
+  };
+
+  if(editId) {
+    db.ref(ROOT + "/services/" + editId).set(payload).then(() => closeModal());
+  } else {
+    let key = db.ref(ROOT + "/pending_services").push().key;
+    db.ref(ROOT + "/pending_services/" + key).set(payload).then(() => {
+      showCustomAlert("വിജയം", "വിവരങ്ങൾ സമർപ്പിച്ചു!");
+      closeModal();
+    });
+  }
+
+  submitBtn.disabled = false;
+  submitBtn.textContent = "സമർപ്പിക്കുക";
+});
+
+initApp();
+</script>
+</body>
+</html>
